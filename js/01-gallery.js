@@ -4,9 +4,8 @@ import { galleryItems } from './gallery-items.js';
 // console.log(galleryItems);
 const galleryList = document.querySelector(`.gallery`);
 const itemsMarkup = creatItemsGalleryMarkup(galleryItems);
-galleryList.insertAdjacentHTML(`beforeend`, itemsMarkup);
 
-// console.log(creatItemsGalleryMarkup(galleryItems));
+
 function creatItemsGalleryMarkup(items) {
 return galleryItems.map(({ preview, original, description }) => {
     return `
@@ -23,11 +22,36 @@ return galleryItems.map(({ preview, original, description }) => {
     `;
     }).join(` `);
     }
-
+galleryList.insertAdjacentHTML(`beforeend`, itemsMarkup);
+// console.log(creatItemsGalleryMarkup(galleryItems));
 galleryList.addEventListener(`click`, hanlerClickItem);
 
 function hanlerClickItem(e) {
-    if (e.target.classList.contains(`gallery__image`)) {
-        console.log(`dddd`);
+    e.preventDefault();
+    // if (e.target.classList.contains(`gallery__image`)) {
+    //     console.log(`gallery__image`, e.target);
+    // }
+
+    if (e.target.classList.contains(`gallery__item`)) {
+        return;
     }
+    const instance = basicLightbox.create(`<img src="${e.target.dataset.source}" width="900" height="600">`);
+    instance.show();
+    
+
+
+    // const isItem = e.target.closest(`.gallery__item`);
+    // console.log(isItem);
+    
+    // if (e.target.classList.contains(`gallery__image`)) {
+    //     const { source } = isItem.dataset;
+    //     console.log(source);
+    //     // const obj = findImage(item);
+    // }
 }
+
+// function findImage(item) {
+//     const { source } = item.dataset;
+//         console.log(source);
+// }
+
