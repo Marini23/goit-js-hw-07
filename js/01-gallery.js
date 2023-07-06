@@ -21,32 +21,29 @@ return galleryItems.map(({ preview, original, description }) => {
 </li>
     `;
     }).join(` `);
-    }
+}
+
 galleryList.insertAdjacentHTML(`beforeend`, itemsMarkup);
-// console.log(creatItemsGalleryMarkup(galleryItems));
 galleryList.addEventListener(`click`, hanlerClickItem);
 
-
-    
 
 function hanlerClickItem(e) {
     e.preventDefault();
 
     if (e.target === galleryList) {
-        return;
+    return;
     }
     const instance = basicLightbox.create(`<img src="${e.target.dataset.source}" width="800" height="600">`,
         {
         
     onShow: () => {
-                window.addEventListener(`keydown`, onEsc);
-                
-            },
+        window.addEventListener(`keydown`, onEsc);     
+    },
 
     onClose: () => {
         window.removeEventListener(`keydown`, onEsc);
     },
-        });
+    });
     instance.show();
 
     function onEsc(e) {
@@ -55,20 +52,5 @@ function hanlerClickItem(e) {
     }
     };
     
-
-
-    // const isItem = e.target.closest(`.gallery__item`);
-    // console.log(isItem);
-    
-    // if (e.target.classList.contains(`gallery__image`)) {
-    //     const { source } = isItem.dataset;
-    //     console.log(source);
-    //     // const obj = findImage(item);
-    // }
 }
-
-// function findImage(item) {
-//     const { source } = item.dataset;
-//         console.log(source);
-// }
 
